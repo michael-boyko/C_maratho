@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 BOLD='\033[1m'
 ECHO='echo -e'
 SET_COLOR_BACK="${ECHO} -n ${WHITE}"
-LOG_FILE="erro_log.txt"
+LOG_FILE="error_log.txt"
 
 exit_failure ()
 {
@@ -46,17 +46,15 @@ echo "git add" >> tmp0
 echo "git commit" >> tmp0
 echo "git push" >> tmp0
 
-cat -e tmp0 > tmp0
-
-if (cat -e push_me.txt > tmp1) 2> $LOG_FILE && diff tmp0 tmp1 > $LOG_FILE
+if diff tmp0 push_me.txt > $LOG_FILE
 then
 	$ECHO "task01: is ${GREEN}OK!"
 else
-	rm tmp0 tmp1 2> $TRASH
+	rm tmp0 2> $TRASH
 	exit_failure "task01"
 fi
 
-rm tmp0 tmp1 2> $TRASH
+rm tmp0 2> $TRASH
 $SET_COLOR_BACK
 cd -
 
