@@ -71,6 +71,7 @@ rm -rf fire
 
 if sh set_me_on_file.sh 2> $LOG_FILE && ls -la --full-time fire > tmp1 2> $LOG_FILE && diff ${PWD}tmp0 tmp1 > $LOG_FILE
 then
+        rm -rf fire
 	$ECHO "task02: is ${GREEN}OK!"
 else
 	rm ${PWD}tmp0 tmp1 2> $TRASH
@@ -78,6 +79,7 @@ else
 fi
 
 rm ${PWD}tmp0 tmp1 2> $TRASH
+rm -rf fire
 $SET_COLOR_BACK
 cd - > $TRASH
 
@@ -87,15 +89,15 @@ cd t03 2> $LOG_FILE || exit_failure "t03"
 echo Follow the white rabbit. > tmp0
 
 if chmod 740 wake_up.sh 2> $LOG_FILE && . wake_up.sh 2> $LOG_FILE &&
-	cat -e instructions.txt > tmp1 && diff tmp0 tmp1 > $LOG_FILE
+	diff tmp0 instructions.txt > $LOG_FILE
 then
 	$ECHO "task03: is ${GREEN}OK!"
 else
-	rm tmp0 tmp1 2> $TRASH
+	rm tmp0 instructions.txt 2> $TRASH
 	exit_failure "task03"
 fi
 
-rm tmp0 tmp1 2> $TRASH
+rm tmp0 instructions.txt 2> $TRASH
 $SET_COLOR_BACK
 cd - > $TRASH
 
