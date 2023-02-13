@@ -64,20 +64,20 @@ cd - > $TRASH
 cd t02 2> $LOG_FILE || exit_failure "t02"
 
 ls set_me_on_file.sh > $LOG_FILE || exit_failure "task02"
-touch fire
+touch -t 199908240000 fire
 chmod 400 fire
-ls -laT
-rm fire
+ls -la --full-time fire > ${PWD}tmp0
+rm -rf fire
 
-if chmod 740 set_me_on_file.sh 2> $LOG_FILE && . set_me_on_file.sh > tmp1 2> $LOG_FILE && diff tmp0 tmp1 > $LOG_FILE
+if sh set_me_on_file.sh 2> $LOG_FILE && ls -la --full-time fire > tmp1 2> $LOG_FILE && diff ${PWD}tmp0 tmp1 > $LOG_FILE
 then
 	$ECHO "task02: is ${GREEN}OK!"
 else
-	rm tmp0 tmp1 2> $TRASH
+	rm ${PWD}tmp0 tmp1 2> $TRASH
 	exit_failure "task02"
 fi
 
-rm tmp0 tmp1 2> $TRASH
+rm ${PWD}tmp0 tmp1 2> $TRASH
 $SET_COLOR_BACK
 cd - > $TRASH
 
