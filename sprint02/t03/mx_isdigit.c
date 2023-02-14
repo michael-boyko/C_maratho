@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 bool mx_isdigit(int c) {
     bool ret = false;
 
