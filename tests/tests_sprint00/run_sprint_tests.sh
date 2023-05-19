@@ -2,26 +2,29 @@
 # This is script for testign Ucode Marathon C
 
 TRASH="/dev/null"
-WHITE='\033[1;37m'
+WHITE='\033[1;0m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BOLD='\033[1m'
 ECHO='echo -e'
 PWD=$(pwd)
-SET_COLOR_BACK="${ECHO} -n ${WHITE}"
+SET_COLOR_BACK="${ECHO} -n ${WHITE}${BOLD}"
 LOG_FILE="${PWD}/error_log.txt"
 
 exit_failure ()
 {
 	$ECHO $1": is ${RED}FAILED!"
 	$SET_COLOR_BACK
-	echo "You can get more information aboot WHY TEST WAS FAILED in ${LOG_FILE}"
+	echo "You can get more information about WHY TEST WAS FAILED in ${LOG_FILE}"
 	exit 1
 }
 
 $ECHO "${BOLD}TESTS STARTING!"
+echo "=================="
 echo "Sprint00 start ..."
-cd ../.
+echo "=================="
+
+cd ../../.
 cd sprint00 2> $LOG_FILE || exit_failure "sprint00"
 
 ################### task00.0 ###################
