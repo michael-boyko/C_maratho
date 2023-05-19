@@ -21,6 +21,7 @@ exit_failure ()
 
 $ECHO "${BOLD}TESTS STARTING!"
 echo "Sprint00 start ..."
+cd ../.
 cd sprint00 2> $LOG_FILE || exit_failure "sprint00"
 
 ################### task00.0 ###################
